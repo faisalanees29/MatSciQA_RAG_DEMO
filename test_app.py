@@ -48,8 +48,8 @@ model = AutoModelForCausalLM.from_pretrained(
 )
 tokenizer = AutoTokenizer.from_pretrained(model_option)
 
+# Not used
 system_prompt = "Solve the following question with highly detailed step by step explanation. Write the correct answer inside a dictionary at the end in the following format. The key 'answer' has a list which can be filled by all correct options or by a number as required while answering the question. For example for question with correct answer as option (a), return {'answer':[a]} at the end of solution. For question with multiple options'a,c' as answers, return {'answer':[a,c]}. And for question with numerical values as answer (say 1.33), return {'answer':[1.33]}"
-# question = "When a zinc metal rod is immersed in dilute hydrochloric acid, it results in (A) Evolution of hydrogen (B) Evolution of chlorine (C) Evolution of oxygen (D) No evolution of any gas"
 
 messages = [
     {"role": "user", "content": question}, # system_prompt + question},
@@ -69,9 +69,9 @@ generation_args = {
     "top_p": 0.9,
 }
 
-# Create a button that when clicked will output a greeting
+# Create a button that when clicked will output the LLMs generated output
 if st.button('Generate output'):
     output = pipe(messages, **generation_args)
     model_output = output[0]['generated_text'][1]['content']
-    # Display a greeting message below the button
+    # Display a generated output message below the button
     st.write(f'{model_output}')
