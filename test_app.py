@@ -13,9 +13,17 @@ st.title('MatSciQA RAG Demo')
 # Select model
 model_option = st.selectbox(
    "Select a model",
-   ("microsoft/Phi-3-mini-4k-instruct", "microsoft/Phi-3-mini-4k-instruct", "microsoft/Phi-3-mini-4k-instruct"),
-   index=None,
+   ("microsoft/Phi-3-mini-4k-instruct", "meta-llama/Meta-Llama-3-8B-Instruct"),
+   index=0,
    placeholder="Select model",
+)
+
+# Select token length
+token_length = st.selectbox(
+   "Token length",
+   (256, 512, 1024, 2048),
+   index=None,
+   placeholder="Token length",
 )
 
 # Read input
@@ -26,7 +34,7 @@ option = st.selectbox(
    placeholder="Select model",
 )
 
-if option == "upload text file":
+if option == "Upload text file":
     uploaded_file = st.file_uploader("Add text file containing question")
     if uploaded_file:
         stringio = StringIO(uploaded_file.getvalue().decode("utf-8"))
@@ -62,7 +70,7 @@ pipe = pipeline(
 )
 
 generation_args = {
-    "max_new_tokens": 1024,
+    "max_new_tokens": token_length,
     "return_full_text": True,
 #    "temperature": 0.0,
     "do_sample": True,
