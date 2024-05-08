@@ -2,4 +2,4 @@ transformers
 accelerate
 packaging
 wheel
-flash-attn --no-build-isolation
+flash-attn --install-option='--no-build-isolation'
