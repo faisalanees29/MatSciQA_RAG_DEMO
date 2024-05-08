@@ -34,6 +34,8 @@ option = st.selectbox(
    placeholder="Select model",
 )
 
+question = ''
+
 if option == "Upload text file":
     uploaded_file = st.file_uploader("Add text file containing question")
     if uploaded_file:
@@ -45,8 +47,6 @@ if option == "Upload text file":
         st.write(f"No file uploaded!")
 elif option == "Enter text":
     question = st.text_input("Enter your question", "Type Here...")
-else:
-    question = ''
 
 model = AutoModelForCausalLM.from_pretrained(
     model_option,
