@@ -1,3 +1,5 @@
 transformers
 accelerate
+packaging
+wheel
 flash-attn
